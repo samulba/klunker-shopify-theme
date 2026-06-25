@@ -1,0 +1,157 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Klunker",
+    "theme_version": "1.0.0",
+    "theme_author": "Klunker Atelier",
+    "theme_documentation_url": "https://shopify.dev/docs/themes",
+    "theme_support_url": "https://help.shopify.com/"
+  },
+  {
+    "name": "Farben",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Streng monochrome Palette – Reinweiß, Off-White, Tiefschwarz und ein warmer Greige-/Champagner-Akzent. Kein Bunt."
+      },
+      {
+        "type": "color",
+        "id": "color_background",
+        "label": "Hintergrund (Reinweiß)",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "color",
+        "id": "color_surface",
+        "label": "Fläche / Off-White",
+        "default": "#F7F5F1"
+      },
+      {
+        "type": "color",
+        "id": "color_text",
+        "label": "Text (Tiefschwarz)",
+        "default": "#0A0A0A"
+      },
+      {
+        "type": "color",
+        "id": "color_accent",
+        "label": "Akzent (Greige / Champagner)",
+        "default": "#C9BFB3"
+      }
+    ]
+  },
+  {
+    "name": "Typografie",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Serif-Headlines (Cormorant Garamond) und schlanke Sans (Inter) werden im Layout geladen. Hier steuern Sie Größe und Buchstabenabstand."
+      },
+      {
+        "type": "range",
+        "id": "base_font_size",
+        "label": "Basis-Schriftgröße",
+        "min": 14,
+        "max": 20,
+        "step": 1,
+        "unit": "px",
+        "default": 16
+      },
+      {
+        "type": "range",
+        "id": "nav_letter_spacing",
+        "label": "Buchstabenabstand Navigation",
+        "min": 0,
+        "max": 40,
+        "step": 1,
+        "unit": "%",
+        "default": 16,
+        "info": "Entspricht 0,00–0,40 em."
+      },
+      {
+        "type": "checkbox",
+        "id": "uppercase_headings",
+        "label": "Überschriften in Großbuchstaben",
+        "default": false
+      }
+    ]
+  },
+  {
+    "name": "Layout",
+    "settings": [
+      {
+        "type": "range",
+        "id": "page_width",
+        "label": "Maximale Seitenbreite",
+        "min": 1200,
+        "max": 1800,
+        "step": 20,
+        "unit": "px",
+        "default": 1500
+      },
+      {
+        "type": "range",
+        "id": "section_spacing",
+        "label": "Vertikaler Abstand der Sections",
+        "min": 40,
+        "max": 160,
+        "step": 4,
+        "unit": "px",
+        "default": 96
+      },
+      {
+        "type": "checkbox",
+        "id": "show_section_dividers",
+        "label": "Dünne Trennlinien zwischen Sections",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "Buttons",
+    "settings": [
+      {
+        "type": "select",
+        "id": "button_style",
+        "label": "Button-Stil",
+        "options": [
+          { "value": "outline", "label": "Outline (dünne Linie)" },
+          { "value": "solid", "label": "Fläche (Tiefschwarz)" }
+        ],
+        "default": "outline"
+      }
+    ]
+  },
+  {
+    "name": "Social Media",
+    "settings": [
+      {
+        "type": "text",
+        "id": "social_instagram",
+        "label": "Instagram URL",
+        "info": "z. B. https://instagram.com/klunker"
+      },
+      {
+        "type": "text",
+        "id": "social_pinterest",
+        "label": "Pinterest URL"
+      },
+      {
+        "type": "text",
+        "id": "social_tiktok",
+        "label": "TikTok URL"
+      }
+    ]
+  },
+  {
+    "name": "Branding",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon",
+        "info": "32 x 32 px empfohlen."
+      }
+    ]
+  }
+]

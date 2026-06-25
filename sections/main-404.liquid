@@ -1,0 +1,18 @@
+<section class="section" style="min-height: 60vh; display: grid; place-items: center; text-align: center;">
+  <div class="page-width page-width--narrow">
+    <span class="overline">404</span>
+    <h1 class="h-display" style="margin-top: var(--space-sm);">{{ 'general.404.title' | t }}</h1>
+    <p class="lede" style="margin-top: var(--space-sm);">{{ 'general.404.text' | t }}</p>
+    <p style="margin-top: var(--space-lg);">
+      <a class="btn" href="{{ routes.root_url }}">{{ 'general.404.back_home' | t }}</a>
+    </p>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "404",
+  "tag": "section",
+  "settings": []
+}
+{% endschema %}

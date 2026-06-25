@@ -1,0 +1,117 @@
+<section class="section">
+  <div class="page-width page-width--narrow">
+    <div class="page-header" style="text-align: left; padding-bottom: var(--space-lg);">
+      <h1 class="h1">{{ 'general.cart.title' | t }}</h1>
+    </div>
+
+    {%- if cart.item_count > 0 -%}
+      <form action="{{ routes.cart_url }}" method="post" novalidate>
+        <hr class="hairline">
+        {%- for item in cart.items -%}
+          <div class="cart-row">
+            <a href="{{ item.url }}" class="cart-row__media">
+              {%- if item.image != blank -%}
+                {{ item.image | image_url: width: 200 | image_tag: loading: 'lazy', alt: item.title }}
+              {%- endif -%}
+            </a>
+            <div class="cart-row__info">
+              <a href="{{ item.url }}" class="product-card__title">{{ item.product.title }}</a>
+              {%- unless item.variant.title contains 'Default' -%}
+                <span class="product-card__vendor">{{ item.variant.title }}</span>
+              {%- endunless -%}
+              <a
+                href="{{ item.url_to_remove }}"
+                class="link"
+                style="margin-top: 0.5rem;"
+              >{{ 'general.cart.remove' | t }}</a>
+            </div>
+            <div class="cart-row__qty">
+              <label class="visually-hidden" for="qty-{{ item.index }}">{{ 'general.cart.quantity' | t }}</label>
+              <input
+                id="qty-{{ item.index }}"
+                class="product__select"
+                type="number"
+                min="0"
+                name="updates[]"
+                value="{{ item.quantity }}"
+                style="width: 4.5rem; text-align: center;"
+              >
+            </div>
+            <div class="cart-row__price">{{ item.final_line_price | money }}</div>
+          </div>
+          <hr class="hairline">
+        {%- endfor -%}
+
+        <div class="cart-footer">
+          <p class="text-muted" style="font-size: 0.85rem;">{{ 'general.cart.taxes_note' | t }}</p>
+          <div class="cart-footer__totals">
+            <span class="overline">{{ 'general.cart.subtotal' | t }}</span>
+            <span class="h3">{{ cart.total_price | money }}</span>
+          </div>
+          <div class="cart-footer__actions">
+            <button type="submit" name="update" class="btn">{{ 'general.cart.title' | t }} {{ 'general.cart.quantity' | t | downcase }}</button>
+            <button type="submit" name="checkout" class="btn btn--solid">{{ 'general.cart.checkout' | t }}</button>
+          </div>
+        </div>
+      </form>
+    {%- else -%}
+      <p class="placeholder-note">{{ 'general.cart.empty' | t }}</p>
+      <p style="text-align: center; margin-top: var(--space-md);">
+        <a class="btn" href="{{ routes.all_products_collection_url }}">{{ 'general.cart.continue_shopping' | t }}</a>
+      </p>
+    {%- endif -%}
+  </div>
+</section>
+
+<style>
+  .cart-row {
+    display: grid;
+    grid-template-columns: 80px 1fr auto auto;
+    gap: var(--space-md);
+    align-items: center;
+    padding-block: var(--space-md);
+  }
+  .cart-row__media img {
+    border-radius: var(--radius);
+  }
+  .cart-row__info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+  .cart-footer {
+    margin-top: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    align-items: flex-end;
+    text-align: right;
+  }
+  .cart-footer__totals {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-md);
+  }
+  .cart-footer__actions {
+    display: flex;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+  @media (max-width: 749px) {
+    .cart-row {
+      grid-template-columns: 64px 1fr auto;
+    }
+    .cart-row__qty {
+      grid-column: 2;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Warenkorb",
+  "tag": "section",
+  "settings": []
+}
+{% endschema %}

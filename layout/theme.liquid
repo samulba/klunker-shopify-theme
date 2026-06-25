@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="theme-color" content="{{ settings.color_background }}">
+    <link rel="canonical" href="{{ canonical_url }}">
+
+    {%- if settings.favicon != blank -%}
+      <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
+    {%- endif -%}
+
+    <title>
+      {{ page_title }}
+      {%- if current_tags %} &ndash; {{ 'general.meta.tags' | t: tags: current_tags | join: ', ' }}{% endif -%}
+      {%- if current_page != 1 %} &ndash; {{ 'general.meta.page' | t: page: current_page }}{% endif -%}
+      {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+    </title>
+
+    {%- if page_description -%}
+      <meta name="description" content="{{ page_description | escape }}">
+    {%- endif -%}
+
+    {% comment %} Markenschriften: elegante Serif (Cormorant Garamond) + schlanke Sans (Inter) {% endcomment %}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap"
+    >
+
+    {{ 'base.css' | asset_url | stylesheet_tag }}
+
+    {%- comment -%} Theme-Einstellungen in CSS-Custom-Properties überführen {%- endcomment -%}
+    <style>
+      :root {
+        --color-white: {{ settings.color_background }};
+        --color-offwhite: {{ settings.color_surface }};
+        --color-black: {{ settings.color_text }};
+        --color-greige: {{ settings.color_accent }};
+        --color-bg: {{ settings.color_background }};
+        --color-surface: {{ settings.color_surface }};
+        --color-text: {{ settings.color_text }};
+        --color-accent: {{ settings.color_accent }};
+        --page-width: {{ settings.page_width }}px;
+        --space-2xl: {{ settings.section_spacing }}px;
+        --nav-tracking: {{ settings.nav_letter_spacing | divided_by: 100.0 }}em;
+      }
+
+      html {
+        font-size: {{ settings.base_font_size }}px;
+      }
+
+      {%- if settings.uppercase_headings -%}
+        h1, h2, h3, .h-display, .h1, .h2, .h3, .hero__title {
+          text-transform: uppercase;
+          letter-spacing: 0.04em;
+        }
+      {%- endif -%}
+
+      {%- unless settings.show_section_dividers -%}
+        .shopify-section + .shopify-section .header,
+        .section-divider { border-top: 0; }
+      {%- endunless -%}
+    </style>
+
+    <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
+
+    {{ content_for_header }}
+  </head>
+
+  <body class="template-{{ request.page_type | handle }} buttons-{{ settings.button_style }}">
+    <a class="skip-to-content" href="#MainContent">
+      {{ 'general.accessibility.skip_to_content' | t }}
+    </a>
+
+    {% section 'header' %}
+
+    <main id="MainContent" role="main">
+      {{ content_for_layout }}
+    </main>
+
+    {%- comment -%}
+      Der Footer wird laut Projektvorgabe als Section in templates/index.json
+      gepflegt. So lässt er sich auf der Startseite direkt im Theme-Editor
+      bearbeiten. Soll der Footer auf allen Seiten erscheinen, kann er hier
+      global per {% section 'footer' %} eingebunden werden.
+    {%- endcomment -%}
+  </body>
+</html>

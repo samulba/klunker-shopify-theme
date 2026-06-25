@@ -1,0 +1,69 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "overline": "Frühjahr / Sommer 2026",
+        "heading": "Die Kunst der Zurückhaltung",
+        "text": "<p>Reduzierte Silhouetten, edle Materialien, zeitlose Eleganz. Eine Garderobe, die leise spricht.</p>",
+        "button_label": "Kollektion entdecken",
+        "button_style": "outline",
+        "button_label_2": "Lookbook",
+        "overlay_opacity": 15,
+        "height": 85,
+        "text_alignment": "left",
+        "color_scheme": "offwhite"
+      }
+    },
+    "product_grid": {
+      "type": "product-grid",
+      "settings": {
+        "overline": "Die Kollektion",
+        "heading": "Neuheiten",
+        "text": "Ausgewählte Stücke der aktuellen Saison.",
+        "products_to_show": 4,
+        "columns": 4,
+        "button_label": "Alle ansehen",
+        "button_style": "outline",
+        "color_scheme": "white"
+      }
+    },
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "shop": {
+          "type": "menu",
+          "settings": {
+            "heading": "Shop",
+            "menu": "footer"
+          }
+        },
+        "service": {
+          "type": "menu",
+          "settings": {
+            "heading": "Service",
+            "menu": "footer"
+          }
+        },
+        "haus": {
+          "type": "menu",
+          "settings": {
+            "heading": "Haus",
+            "menu": "footer"
+          }
+        }
+      },
+      "block_order": ["shop", "service", "haus"],
+      "settings": {
+        "brand_heading": "KLUNKER",
+        "brand_text": "<p>Quiet Luxury aus Berlin. Zeitlose Mode in monochromer Klarheit.</p>",
+        "show_newsletter": true,
+        "newsletter_heading": "Letters",
+        "newsletter_placeholder": "E-Mail-Adresse",
+        "copyright_text": "Klunker",
+        "color_scheme": "offwhite"
+      }
+    }
+  },
+  "order": ["hero", "product_grid", "footer"]
+}

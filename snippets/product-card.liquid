@@ -1,0 +1,50 @@
+{%- comment -%}
+  Produktkarte — Quiet-Luxury-Stil.
+  Akzeptiert:
+    - product:     ein Produktobjekt (optional)
+    - placeholder: true, um eine Platzhalterkarte zu zeigen (optional)
+{%- endcomment -%}
+
+{%- if placeholder -%}
+  <div class="product-card">
+    <div class="product-card__media">
+      {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+    </div>
+    <div class="product-card__info">
+      <span class="product-card__title">Produktname</span>
+      <span class="price">€ 0,00</span>
+    </div>
+  </div>
+{%- else -%}
+  <a href="{{ product.url }}" class="product-card">
+    <div class="product-card__media">
+      {%- if product.featured_media != blank -%}
+        {{
+          product.featured_media
+          | image_url: width: 800
+          | image_tag:
+            loading: 'lazy',
+            sizes: '(max-width: 749px) 50vw, 25vw',
+            widths: '300, 400, 600, 800, 1000',
+            alt: product.featured_media.alt | default: product.title
+        }}
+      {%- else -%}
+        {{ 'product-2' | placeholder_svg_tag: 'placeholder-svg' }}
+      {%- endif -%}
+
+      {%- if product.compare_at_price > product.price -%}
+        <span class="product-card__badge">Sale</span>
+      {%- elsif product.tags contains 'Neu' -%}
+        <span class="product-card__badge">Neu</span>
+      {%- endif -%}
+    </div>
+
+    <div class="product-card__info">
+      {%- if product.vendor != blank -%}
+        <span class="product-card__vendor">{{ product.vendor }}</span>
+      {%- endif -%}
+      <span class="product-card__title">{{ product.title }}</span>
+      {% render 'price', product: product %}
+    </div>
+  </a>
+{%- endif -%}

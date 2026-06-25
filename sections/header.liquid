@@ -1,0 +1,100 @@
+{%- liquid
+  assign menu = section.settings.menu
+  assign links = linklists[menu].links
+-%}
+
+<header class="header scheme-{{ section.settings.color_scheme }}">
+  <div class="page-width">
+    <div class="header__inner">
+      {%- comment -%} Linke Navigation (Desktop) {%- endcomment -%}
+      <nav class="header__nav header__nav--left" aria-label="{{ 'general.accessibility.primary_navigation' | t }}">
+        {%- for link in links limit: 4 -%}
+          <a href="{{ link.url }}" class="nav-link"{% if link.active %} aria-current="page"{% endif %}>
+            {{- link.title -}}
+          </a>
+        {%- endfor -%}
+      </nav>
+
+      {%- comment -%} Mobile: Menü-Toggle {%- endcomment -%}
+      <button
+        class="menu-toggle"
+        type="button"
+        data-menu-toggle
+        aria-expanded="false"
+        aria-controls="MobileNav"
+      >
+        {{ 'general.accessibility.menu' | t }}
+      </button>
+
+      {%- comment -%} Logo / Wortmarke {%- endcomment -%}
+      <a href="{{ routes.root_url }}" class="header__logo">
+        {%- if section.settings.logo != blank -%}
+          {{ section.settings.logo | image_url: width: 320 | image_tag: alt: shop.name, loading: 'eager', class: 'header__logo-image' }}
+        {%- else -%}
+          {{ section.settings.logo_text | default: shop.name }}
+        {%- endif -%}
+      </a>
+
+      {%- comment -%} Rechte Aktionen {%- endcomment -%}
+      <nav class="header__nav header__nav--right" aria-label="{{ 'general.accessibility.secondary_navigation' | t }}">
+        <a href="{{ routes.search_url }}" class="nav-link">{{ 'general.search.search' | t }}</a>
+        {%- if shop.customer_accounts_enabled -%}
+          <a href="{{ routes.account_url }}" class="nav-link">{{ 'general.account.account' | t }}</a>
+        {%- endif -%}
+        <a href="{{ routes.cart_url }}" class="nav-link">
+          {{ 'general.cart.title' | t }} ({{ cart.item_count }})
+        </a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+{%- comment -%} Mobile-Navigation (Drawer) {%- endcomment -%}
+<div class="nav-overlay" data-nav-overlay></div>
+<nav class="mobile-nav" id="MobileNav" aria-label="{{ 'general.accessibility.primary_navigation' | t }}">
+  <button class="link" type="button" data-menu-close>{{ 'general.accessibility.close' | t }}</button>
+  {%- for link in links -%}
+    <a href="{{ link.url }}">{{ link.title }}</a>
+  {%- endfor -%}
+  <a href="{{ routes.search_url }}">{{ 'general.search.search' | t }}</a>
+  <a href="{{ routes.cart_url }}">{{ 'general.cart.title' | t }} ({{ cart.item_count }})</a>
+</nav>
+
+{% schema %}
+{
+  "name": "Header",
+  "tag": "header",
+  "class": "section-header",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo-Bild",
+      "info": "Optional. Ohne Bild wird der Schriftzug verwendet."
+    },
+    {
+      "type": "text",
+      "id": "logo_text",
+      "label": "Wortmarke",
+      "default": "KLUNKER"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Navigationsmenü",
+      "default": "main-menu"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Farbschema",
+      "options": [
+        { "value": "white", "label": "Reinweiß" },
+        { "value": "offwhite", "label": "Off-White" },
+        { "value": "black", "label": "Tiefschwarz" }
+      ],
+      "default": "white"
+    }
+  ]
+}
+{% endschema %}

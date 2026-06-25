@@ -1,0 +1,33 @@
+{
+  "current": {
+    "color_background": "#FFFFFF",
+    "color_surface": "#F7F5F1",
+    "color_text": "#0A0A0A",
+    "color_accent": "#C9BFB3",
+    "base_font_size": 16,
+    "nav_letter_spacing": 16,
+    "uppercase_headings": false,
+    "page_width": 1500,
+    "section_spacing": 96,
+    "show_section_dividers": true,
+    "button_style": "outline",
+    "social_instagram": "",
+    "social_pinterest": "",
+    "social_tiktok": ""
+  },
+  "presets": {
+    "Klunker": {
+      "color_background": "#FFFFFF",
+      "color_surface": "#F7F5F1",
+      "color_text": "#0A0A0A",
+      "color_accent": "#C9BFB3",
+      "base_font_size": 16,
+      "nav_letter_spacing": 16,
+      "uppercase_headings": false,
+      "page_width": 1500,
+      "section_spacing": 96,
+      "show_section_dividers": true,
+      "button_style": "outline"
+    }
+  }
+}

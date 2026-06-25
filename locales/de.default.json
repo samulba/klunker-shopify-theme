@@ -1,0 +1,71 @@
+{
+  "general": {
+    "accessibility": {
+      "skip_to_content": "Zum Inhalt springen",
+      "primary_navigation": "Hauptnavigation",
+      "secondary_navigation": "Sekundärnavigation",
+      "menu": "Menü",
+      "close": "Schließen"
+    },
+    "meta": {
+      "tags": "Schlagwörter: {{ tags }}",
+      "page": "Seite {{ page }}"
+    },
+    "search": {
+      "search": "Suche",
+      "placeholder": "Wonach suchen Sie?",
+      "results_with_count": {
+        "one": "{{ count }} Ergebnis",
+        "other": "{{ count }} Ergebnisse"
+      },
+      "no_results": "Keine Ergebnisse für „{{ terms }}“."
+    },
+    "account": {
+      "account": "Konto"
+    },
+    "cart": {
+      "title": "Warenkorb",
+      "empty": "Ihr Warenkorb ist leer.",
+      "subtotal": "Zwischensumme",
+      "checkout": "Zur Kasse",
+      "continue_shopping": "Weiter einkaufen",
+      "remove": "Entfernen",
+      "quantity": "Menge",
+      "taxes_note": "Steuern und Versand werden an der Kasse berechnet."
+    },
+    "newsletter": {
+      "subscribe": "Abonnieren",
+      "success": "Vielen Dank für Ihre Anmeldung."
+    },
+    "pagination": {
+      "previous": "Zurück",
+      "next": "Weiter"
+    },
+    "404": {
+      "title": "Seite nicht gefunden",
+      "text": "Die gewünschte Seite existiert nicht mehr.",
+      "back_home": "Zur Startseite"
+    }
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "In den Warenkorb",
+      "sold_out": "Ausverkauft",
+      "unavailable": "Nicht verfügbar",
+      "from_price": "ab",
+      "quantity": "Menge",
+      "description": "Beschreibung",
+      "vendor": "Marke"
+    }
+  },
+  "collections": {
+    "general": {
+      "title": "Kollektion",
+      "empty": "In dieser Kollektion sind derzeit keine Produkte.",
+      "items_with_count": {
+        "one": "{{ count }} Artikel",
+        "other": "{{ count }} Artikel"
+      }
+    }
+  }
+}

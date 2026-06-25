@@ -1,0 +1,52 @@
+<section class="section">
+  <div class="page-width" style="--grid-cols: {{ section.settings.columns }};">
+    <div class="page-header">
+      <span class="overline">{{ 'collections.general.title' | t }}</span>
+      <h1 class="h1">{{ collection.title | default: 'Kollektion' }}</h1>
+      {%- if collection.description != blank -%}
+        <p class="lede" style="max-width: 48rem; margin-inline: auto;">{{ collection.description }}</p>
+      {%- endif -%}
+    </div>
+
+    {%- if collection.products_count > 0 -%}
+      <div class="product-grid__items">
+        {%- paginate collection.products by 12 -%}
+          {%- for product in collection.products -%}
+            {% render 'product-card', product: product %}
+          {%- endfor -%}
+
+          {%- if paginate.pages > 1 -%}
+            <nav class="pagination" style="grid-column: 1 / -1; text-align: center; margin-top: var(--space-xl);">
+              {%- if paginate.previous -%}
+                <a class="link" href="{{ paginate.previous.url }}">{{ 'general.pagination.previous' | t }}</a>
+              {%- endif -%}
+              {%- if paginate.next -%}
+                <a class="link" href="{{ paginate.next.url }}" style="margin-left: var(--space-md);">{{ 'general.pagination.next' | t }}</a>
+              {%- endif -%}
+            </nav>
+          {%- endif -%}
+        {%- endpaginate -%}
+      </div>
+    {%- else -%}
+      <p class="placeholder-note">{{ 'collections.general.empty' | t }}</p>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Kollektion",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "range",
+      "id": "columns",
+      "label": "Spalten (Desktop)",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "default": 3
+    }
+  ]
+}
+{% endschema %}

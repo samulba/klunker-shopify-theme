@@ -1,0 +1,189 @@
+<footer class="footer scheme-{{ section.settings.color_scheme }}">
+  <div class="page-width">
+    <div class="footer__top">
+      {%- comment -%} Markenspalte {%- endcomment -%}
+      <div class="footer__brand">
+        {%- if section.settings.brand_heading != blank -%}
+          <h2>{{ section.settings.brand_heading }}</h2>
+        {%- endif -%}
+        {%- if section.settings.brand_text != blank -%}
+          <p>{{ section.settings.brand_text }}</p>
+        {%- endif -%}
+
+        {%- if section.settings.show_newsletter -%}
+          <div style="margin-top: var(--space-lg);">
+            {%- if section.settings.newsletter_heading != blank -%}
+              <div class="footer__col-title">{{ section.settings.newsletter_heading }}</div>
+            {%- endif -%}
+            {%- form 'customer', class: 'newsletter' -%}
+              <input type="hidden" name="contact[tags]" value="newsletter">
+              <input
+                type="email"
+                name="contact[email]"
+                placeholder="{{ section.settings.newsletter_placeholder | escape }}"
+                aria-label="{{ section.settings.newsletter_placeholder | escape }}"
+                required
+              >
+              <button type="submit">{{ 'general.newsletter.subscribe' | t }}</button>
+            {%- endform -%}
+          </div>
+        {%- endif -%}
+
+        {%- comment -%} Social-Links aus den globalen Theme-Einstellungen {%- endcomment -%}
+        {%- if settings.social_instagram != blank
+          or settings.social_pinterest != blank
+          or settings.social_tiktok != blank
+        -%}
+          <div class="footer__social">
+            {%- if settings.social_instagram != blank -%}
+              <a href="{{ settings.social_instagram }}" aria-label="Instagram">{% render 'social-icons', icon: 'instagram' %}</a>
+            {%- endif -%}
+            {%- if settings.social_pinterest != blank -%}
+              <a href="{{ settings.social_pinterest }}" aria-label="Pinterest">{% render 'social-icons', icon: 'pinterest' %}</a>
+            {%- endif -%}
+            {%- if settings.social_tiktok != blank -%}
+              <a href="{{ settings.social_tiktok }}" aria-label="TikTok">{% render 'social-icons', icon: 'tiktok' %}</a>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+      {%- comment -%} Link-Spalten als Blocks {%- endcomment -%}
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'menu' -%}
+          <div class="footer__col" {{ block.shopify_attributes }}>
+            {%- if block.settings.heading != blank -%}
+              <div class="footer__col-title">{{ block.settings.heading }}</div>
+            {%- endif -%}
+            <ul class="footer__links">
+              {%- for link in linklists[block.settings.menu].links -%}
+                <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+              {%- endfor -%}
+            </ul>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+
+    <div class="footer__bottom">
+      <span>&copy; {{ 'now' | date: '%Y' }} {{ section.settings.copyright_text | default: shop.name }}</span>
+      <span class="footer__bottom-links">
+        {%- if section.settings.legal_menu != blank -%}
+          {%- for link in linklists[section.settings.legal_menu].links -%}
+            <a href="{{ link.url }}">{{ link.title }}</a>
+          {%- endfor -%}
+        {%- endif -%}
+      </span>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "tag": "footer",
+  "class": "section-footer",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Marke"
+    },
+    {
+      "type": "text",
+      "id": "brand_heading",
+      "label": "Marken-Schriftzug",
+      "default": "KLUNKER"
+    },
+    {
+      "type": "richtext",
+      "id": "brand_text",
+      "label": "Kurztext",
+      "default": "<p>Quiet Luxury aus Berlin. Zeitlose Mode in monochromer Klarheit.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Newsletter"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_newsletter",
+      "label": "Newsletter anzeigen",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "newsletter_heading",
+      "label": "Überschrift",
+      "default": "Letters"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_placeholder",
+      "label": "Platzhalter",
+      "default": "E-Mail-Adresse"
+    },
+    {
+      "type": "header",
+      "content": "Unten"
+    },
+    {
+      "type": "text",
+      "id": "copyright_text",
+      "label": "Copyright-Text",
+      "default": "Klunker"
+    },
+    {
+      "type": "link_list",
+      "id": "legal_menu",
+      "label": "Rechtliches-Menü",
+      "default": "footer"
+    },
+    {
+      "type": "header",
+      "content": "Darstellung"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Farbschema",
+      "options": [
+        { "value": "white", "label": "Reinweiß" },
+        { "value": "offwhite", "label": "Off-White" },
+        { "value": "black", "label": "Tiefschwarz" }
+      ],
+      "default": "offwhite"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "menu",
+      "name": "Link-Spalte",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Überschrift",
+          "default": "Shop"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "Menü",
+          "default": "footer"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 3,
+  "presets": [
+    {
+      "name": "Footer",
+      "blocks": [
+        { "type": "menu", "settings": { "heading": "Shop" } },
+        { "type": "menu", "settings": { "heading": "Service" } },
+        { "type": "menu", "settings": { "heading": "Haus" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,71 @@
+{
+  "general": {
+    "accessibility": {
+      "skip_to_content": "Skip to content",
+      "primary_navigation": "Primary navigation",
+      "secondary_navigation": "Secondary navigation",
+      "menu": "Menu",
+      "close": "Close"
+    },
+    "meta": {
+      "tags": "Tagged: {{ tags }}",
+      "page": "Page {{ page }}"
+    },
+    "search": {
+      "search": "Search",
+      "placeholder": "What are you looking for?",
+      "results_with_count": {
+        "one": "{{ count }} result",
+        "other": "{{ count }} results"
+      },
+      "no_results": "No results for “{{ terms }}”."
+    },
+    "account": {
+      "account": "Account"
+    },
+    "cart": {
+      "title": "Cart",
+      "empty": "Your cart is empty.",
+      "subtotal": "Subtotal",
+      "checkout": "Checkout",
+      "continue_shopping": "Continue shopping",
+      "remove": "Remove",
+      "quantity": "Quantity",
+      "taxes_note": "Taxes and shipping calculated at checkout."
+    },
+    "newsletter": {
+      "subscribe": "Subscribe",
+      "success": "Thank you for subscribing."
+    },
+    "pagination": {
+      "previous": "Previous",
+      "next": "Next"
+    },
+    "404": {
+      "title": "Page not found",
+      "text": "The page you were looking for does not exist.",
+      "back_home": "Back to home"
+    }
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Add to cart",
+      "sold_out": "Sold out",
+      "unavailable": "Unavailable",
+      "from_price": "from",
+      "quantity": "Quantity",
+      "description": "Description",
+      "vendor": "Brand"
+    }
+  },
+  "collections": {
+    "general": {
+      "title": "Collection",
+      "empty": "There are no products in this collection yet.",
+      "items_with_count": {
+        "one": "{{ count }} item",
+        "other": "{{ count }} items"
+      }
+    }
+  }
+}

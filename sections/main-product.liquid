@@ -1,0 +1,141 @@
+<section class="section">
+  <div class="page-width">
+    <div class="product">
+      <div class="product__media">
+        {%- if product.featured_media != blank -%}
+          {{
+            product.featured_media
+            | image_url: width: 1400
+            | image_tag:
+              loading: 'eager',
+              sizes: '(max-width: 749px) 100vw, 55vw',
+              widths: '400, 600, 800, 1000, 1400',
+              alt: product.featured_media.alt | default: product.title
+          }}
+        {%- else -%}
+          {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+        {%- endif -%}
+
+        {%- for media in product.media offset: 1 limit: 4 -%}
+          {{
+            media
+            | image_url: width: 1400
+            | image_tag: loading: 'lazy', sizes: '(max-width: 749px) 100vw, 55vw', widths: '400, 600, 800, 1000, 1400'
+          }}
+        {%- endfor -%}
+      </div>
+
+      <div class="product__info">
+        {%- if product.vendor != blank -%}
+          <span class="overline">{{ product.vendor }}</span>
+        {%- endif -%}
+        <h1 class="h2 product__title">{{ product.title }}</h1>
+
+        <div class="product__price">
+          {% render 'price', product: product %}
+        </div>
+
+        {%- form 'product', product, class: 'product__form' -%}
+          {%- unless product.has_only_default_variant -%}
+            <div class="product__variants">
+              <label class="overline" for="Variant-{{ section.id }}">{{ product.options | join: ' / ' }}</label>
+              <select id="Variant-{{ section.id }}" name="id" class="product__select">
+                {%- for variant in product.variants -%}
+                  <option
+                    value="{{ variant.id }}"
+                    {% if variant == product.selected_or_first_available_variant %}selected{% endif %}
+                    {% unless variant.available %}disabled{% endunless %}
+                  >
+                    {{ variant.title }} — {{ variant.price | money }}
+                    {%- unless variant.available %} ({{ 'products.product.sold_out' | t }}){% endunless -%}
+                  </option>
+                {%- endfor -%}
+              </select>
+            </div>
+          {%- else -%}
+            <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+          {%- endunless -%}
+
+          <button
+            type="submit"
+            name="add"
+            class="btn btn--solid btn--block"
+            {% unless product.available %}disabled{% endunless %}
+          >
+            {%- if product.available -%}
+              {{ 'products.product.add_to_cart' | t }}
+            {%- else -%}
+              {{ 'products.product.sold_out' | t }}
+            {%- endif -%}
+          </button>
+        {%- endform -%}
+
+        {%- if product.description != blank -%}
+          <div class="product__description rte">
+            <hr class="hairline">
+            {{ product.description }}
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .product {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: var(--space-2xl);
+    align-items: start;
+  }
+  .product__media {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+  .product__media img {
+    width: 100%;
+    border-radius: var(--radius);
+  }
+  .product__info {
+    position: sticky;
+    top: calc(var(--space-2xl));
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+  .product__title {
+    margin-top: var(--space-2xs);
+  }
+  .product__select {
+    width: 100%;
+    padding: 0.9rem 1rem;
+    border: 1px solid var(--color-hairline-strong);
+    border-radius: var(--radius);
+    background: var(--color-bg);
+    font: inherit;
+    font-size: 0.9rem;
+  }
+  .product__variants {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  @media (max-width: 749px) {
+    .product {
+      grid-template-columns: 1fr;
+      gap: var(--space-lg);
+    }
+    .product__info {
+      position: static;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Produkt",
+  "tag": "section",
+  "settings": []
+}
+{% endschema %}
