@@ -627,17 +627,18 @@ h4 {
   object-fit: cover;
 }
 
-/* Ken-Burns: sehr langsamer Zoom */
-.js .hero__media img {
-  animation: kenburns 16s var(--ease-inout) both;
+/* Parallax-Basis: leicht überskaliert, damit der Scroll-Versatz keine
+   Kanten freilegt. Den Versatz steuert global.js. */
+.hero__media img,
+.editorial__media img {
+  transform: scale(1.12);
+  will-change: transform;
 }
 
-@keyframes kenburns {
-  from {
-    transform: scale(1.08);
-  }
-  to {
-    transform: scale(1);
+@media (prefers-reduced-motion: reduce) {
+  .hero__media img,
+  .editorial__media img {
+    transform: none;
   }
 }
 
@@ -837,11 +838,6 @@ h4 {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform var(--duration-slow) var(--ease);
-}
-
-.editorial__media:hover img {
-  transform: scale(1.04);
 }
 
 .editorial__content {
@@ -1616,4 +1612,107 @@ a.custom__item:hover .custom__item-arrow {
     padding: 0.85rem 1.2rem;
   }
 }
+
+/* ==========================================================================
+   Motion-Ebene — Fortschritt, Hero-Headline, Stats, Magnetik
+   ========================================================================== */
+
+/* Scroll-Fortschrittsbalken (dünne Gold-Linie ganz oben) */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  background: var(--color-accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  z-index: 80;
+  pointer-events: none;
+}
+
+/* Hero-Headline: Wörter steigen aus einer Maske ein */
+.js .hero__title--animated .word {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding-bottom: 0.12em;
+  margin-bottom: -0.12em;
+}
+
+.js .hero__title--animated .word > span {
+  display: inline-block;
+  transform: translateY(110%);
+  animation: word-up 0.9s var(--ease) forwards;
+  animation-delay: calc(var(--i, 0) * 0.07s + 0.15s);
+}
+
+@keyframes word-up {
+  to {
+    transform: translateY(0);
+  }
+}
+
+/* Magnetische Buttons */
+.is-magnetic {
+  transition: transform 0.4s var(--ease),
+    color var(--duration) var(--ease),
+    border-color var(--duration) var(--ease);
+  will-change: transform;
+}
+
+/* Stats / Zähler */
+.stats__head {
+  max-width: 40rem;
+  margin-bottom: var(--space-xl);
+}
+
+.stats__grid {
+  display: grid;
+  grid-template-columns: repeat(var(--stat-cols, 4), minmax(0, 1fr));
+  gap: var(--space-xl) var(--space-md);
+}
+
+.stat {
+  border-top: 1px solid var(--color-hairline);
+  padding-top: var(--space-md);
+}
+
+.stat__num {
+  font-family: var(--font-heading);
+  font-size: clamp(2.8rem, 6vw, 5rem);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  display: flex;
+  align-items: baseline;
+  gap: 0.05em;
+}
+
+.stat__suffix {
+  color: var(--color-accent);
+}
+
+.stat__label {
+  margin-top: var(--space-sm);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+  color: var(--color-text-muted);
+}
+
+@media (max-width: 749px) {
+  .stats__grid {
+    --stat-cols: 2;
+    gap: var(--space-lg) var(--space-md);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js .hero__title--animated .word > span {
+    transform: none;
+    animation: none;
+  }
+}
+
 

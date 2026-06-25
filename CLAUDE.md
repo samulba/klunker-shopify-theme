@@ -52,13 +52,20 @@ Werte liegen global in `config/settings_schema.json` und werden in
 - Subtile Scrims (sanfte Verläufe) **nur zur Lesbarkeit über Bildern**
   (Hero, Kacheln) — sonst keine dekorativen Verläufe.
 
-### Bewegung (ruhig, langsam, `--ease`)
-- **Scroll-Reveal:** Elemente mit Klasse `.reveal` blenden beim Scrollen ein
-  (IntersectionObserver in `global.js`). Nur aktiv bei vorhandenem JS (`html.js`),
-  `prefers-reduced-motion` wird respektiert.
-- **Hero:** langsamer Ken-Burns-Zoom + Scroll-Hinweis.
-- **Lauftext** (`marquee`), **Hover-Zoom** auf Bildern, **zweites Produktbild**
-  beim Hover, animierte Unterstreichungen, schrumpfender Sticky-Header.
+### Bewegung — spürbar, aber kultiviert (`global.js`, `--ease`)
+Bewusst lebendig (nicht „brav"), `prefers-reduced-motion` wird überall respektiert,
+Effekte greifen nur bei vorhandenem JS (`html.js`):
+- **Scroll-Fortschritt:** dünne Gold-Linie oben (`.scroll-progress`, `[data-progress]`).
+- **Hero-Headline:** Wörter steigen aus einer Maske ein (`.hero__title--animated`,
+  in `hero.liquid` per `split` in `.word`-Spans zerlegt).
+- **Parallax:** Hero- und Editorial-Bilder bewegen sich beim Scrollen langsamer
+  (JS setzt `transform` auf `.hero__media img`, `.editorial__media img`; Bilder sind
+  dafür leicht überskaliert — deshalb dort **kein** zusätzlicher Hover-Zoom).
+- **Zähler:** `[data-count]` zählt beim Reinscrollen hoch (Sektion `stats`).
+- **Magnetische Buttons:** `.btn--solid` und der schwebende CTA folgen leicht dem
+  Cursor (nur bei `hover: hover`).
+- Außerdem: **Scroll-Reveal** (`.reveal`), **Lauftext** (`marquee`), **zweites
+  Produktbild** beim Hover, animierte Unterstreichungen, schrumpfender Sticky-Header.
 
 ### Buttons
 - `.btn` (Outline) / `.btn--solid` (Fläche) / `.btn--ghost` (Textlink mit Linie).
@@ -101,7 +108,7 @@ Die PNGs sind groß (~1–2 MB) — bei echten Produkten ggf. optimieren/als Web
 ```
 Global (in theme.liquid):  announcement-bar, header, schwebender Custom-CTA
 Startseite (index.json):   hero · marquee · custom-list · collection-list ·
-                           product-grid · image-with-text · bespoke ·
+                           product-grid · image-with-text · bespoke · stats ·
                            statement · newsletter · footer
 Standard-Templates:        main-product · main-collection · main-cart ·
                            main-page · main-404 · main-search
@@ -109,7 +116,7 @@ Standard-Templates:        main-product · main-collection · main-cart ·
 
 ### Startseite (`templates/index.json`)
 Reihenfolge: Hero → Lauftext → **Custom-Statement** → Kategorien → Produkt-Grid →
-Bild-mit-Text → **Maßanfertigung** → Statement → Newsletter → Footer. Header &
+Bild-mit-Text → **Maßanfertigung** → **Zahlen/Stats** → Statement → Newsletter → Footer. Header &
 Ankündigungsleiste sind global in `theme.liquid`, ebenso der schwebende
 „Custom anfragen"-Button (steuerbar unter Theme-Einstellungen → „Custom-Anfrage").
 Der Footer wird (wie ursprünglich vorgegeben) als Section in `index.json` gepflegt.

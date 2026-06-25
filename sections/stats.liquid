@@ -1,0 +1,117 @@
+<section class="section scheme-{{ section.settings.color_scheme }}">
+  <div class="page-width">
+    {%- if section.settings.overline != blank or section.settings.heading != blank -%}
+      <div class="stats__head reveal">
+        {%- if section.settings.overline != blank -%}
+          <span class="overline">{{ section.settings.overline }}</span>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h2 class="h2" style="margin-top: var(--space-2xs);">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="stats__grid" style="--stat-cols: {{ section.blocks.size | at_most: 4 }};">
+      {%- for block in section.blocks -%}
+        <div
+          class="stat reveal"
+          style="--reveal-delay: {{ forloop.index0 | times: 0.08 }}s;"
+          {{ block.shopify_attributes }}
+        >
+          <span class="stat__num">
+            <span
+              data-count="{{ block.settings.value }}"
+              data-decimals="{{ block.settings.decimals }}"
+            >{{ block.settings.value }}</span>
+            {%- if block.settings.suffix != blank -%}
+              <span class="stat__suffix">{{ block.settings.suffix }}</span>
+            {%- endif -%}
+          </span>
+          <div class="stat__label">{{ block.settings.label }}</div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Zahlen",
+  "tag": "section",
+  "max_blocks": 4,
+  "settings": [
+    {
+      "type": "text",
+      "id": "overline",
+      "label": "Eyebrow",
+      "default": "Klunker in Zahlen"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Überschrift",
+      "default": "Worauf du dich verlässt."
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Farbschema",
+      "options": [
+        { "value": "white", "label": "Reinweiß" },
+        { "value": "offwhite", "label": "Off-White" },
+        { "value": "black", "label": "Tiefschwarz" }
+      ],
+      "default": "offwhite"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Zahl",
+      "settings": [
+        {
+          "type": "text",
+          "id": "value",
+          "label": "Wert (Zahl)",
+          "default": "100",
+          "info": "Nur Ziffern, z. B. 100 oder 4.9"
+        },
+        {
+          "type": "select",
+          "id": "decimals",
+          "label": "Nachkommastellen",
+          "options": [
+            { "value": "0", "label": "0" },
+            { "value": "1", "label": "1" },
+            { "value": "2", "label": "2" }
+          ],
+          "default": "0"
+        },
+        {
+          "type": "text",
+          "id": "suffix",
+          "label": "Zusatz (z. B. %, K, +)",
+          "default": "%"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Beschriftung",
+          "default": "Handarbeit"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Zahlen",
+      "blocks": [
+        { "type": "stat", "settings": { "value": "100", "suffix": "%", "label": "Handarbeit" } },
+        { "type": "stat", "settings": { "value": "18", "suffix": "K", "label": "Massives Gold" } },
+        { "type": "stat", "settings": { "value": "30", "suffix": "", "label": "Tage Rückgabe" } },
+        { "type": "stat", "settings": { "value": "2", "suffix": "", "label": "Jahre Garantie" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

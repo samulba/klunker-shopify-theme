@@ -105,6 +105,21 @@
         "color_scheme": "white"
       }
     },
+    "stats": {
+      "type": "stats",
+      "blocks": {
+        "k1": { "type": "stat", "settings": { "value": "100", "decimals": "0", "suffix": "%", "label": "Handarbeit" } },
+        "k2": { "type": "stat", "settings": { "value": "18", "decimals": "0", "suffix": "K", "label": "Massives Gold" } },
+        "k3": { "type": "stat", "settings": { "value": "30", "decimals": "0", "suffix": "", "label": "Tage Rückgabe" } },
+        "k4": { "type": "stat", "settings": { "value": "2", "decimals": "0", "suffix": "", "label": "Jahre Garantie" } }
+      },
+      "block_order": ["k1", "k2", "k3", "k4"],
+      "settings": {
+        "overline": "Klunker in Zahlen",
+        "heading": "Worauf du dich verlässt.",
+        "color_scheme": "black"
+      }
+    },
     "statement": {
       "type": "statement",
       "settings": {
@@ -149,6 +164,7 @@
     "products",
     "editorial",
     "bespoke",
+    "stats",
     "statement",
     "newsletter",
     "footer"

@@ -34,7 +34,12 @@
       {%- endif -%}
 
       {%- if section.settings.heading != blank -%}
-        <h1 class="hero__title">{{ section.settings.heading }}</h1>
+        <h1 class="hero__title hero__title--animated">
+          {%- assign hero_words = section.settings.heading | split: ' ' -%}
+          {%- for word in hero_words -%}
+            <span class="word"><span style="--i: {{ forloop.index0 }}">{{ word }}</span></span>
+            {% endfor -%}
+        </h1>
       {%- endif -%}
 
       {%- if section.settings.text != blank -%}
