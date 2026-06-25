@@ -1,0 +1,30 @@
+{%- comment -%}
+  Rendert ein Bild aus einer image_picker-Einstellung. Ist keines gewählt,
+  wird das mitgelieferte Theme-Asset (Parameter „fallback“) verwendet.
+
+  Parameter:
+    image    – image_picker-Wert (optional)
+    fallback – Dateiname eines Assets, z. B. 'klunker-hero.png' (optional)
+    alt      – Alternativtext
+    loading  – 'lazy' (Standard) | 'eager'
+    class    – CSS-Klasse(n)
+    sizes / widths – nur wirksam bei image_picker-Bildern (CDN)
+{%- endcomment -%}
+
+{%- liquid
+  assign img_loading = loading | default: 'lazy'
+  assign img_sizes = sizes | default: '100vw'
+  assign img_widths = widths | default: '400, 600, 800, 1200, 1600, 2000'
+-%}
+
+{%- if image != blank -%}
+  {{
+    image
+    | image_url: width: 2000
+    | image_tag: loading: img_loading, alt: alt, class: class, sizes: img_sizes, widths: img_widths
+  }}
+{%- elsif fallback != blank -%}
+  {{ fallback | asset_url | image_tag: loading: img_loading, alt: alt, class: class }}
+{%- else -%}
+  {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+{%- endif -%}

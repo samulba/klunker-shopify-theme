@@ -6,43 +6,49 @@
 
 <section class="section scheme-{{ section.settings.color_scheme }}">
   <div class="page-width" style="--grid-cols: {{ columns }};">
-    {%- if section.settings.heading != blank or section.settings.overline != blank -%}
-      <div class="product-grid__head">
+    <div class="product-grid__head reveal">
+      <div>
         {%- if section.settings.overline != blank -%}
-          <span class="overline">{{ section.settings.overline }}</span>
+          <span class="overline index-mark" data-index="{{ section.settings.index_number }}">{{ section.settings.overline }}</span>
         {%- endif -%}
         {%- if section.settings.heading != blank -%}
           <h2 class="h2">{{ section.settings.heading }}</h2>
         {%- endif -%}
-        {%- if section.settings.text != blank -%}
-          <p class="text-muted">{{ section.settings.text }}</p>
-        {%- endif -%}
       </div>
-    {%- endif -%}
+      {%- if section.settings.button_label != blank -%}
+        <a
+          href="{{ section.settings.button_link | default: collection.url | default: routes.all_products_collection_url }}"
+          class="link"
+        >{{ section.settings.button_label }}</a>
+      {%- endif -%}
+    </div>
 
     <div class="product-grid__items">
       {%- if collection != blank and collection.products_count > 0 -%}
         {%- for product in collection.products limit: limit -%}
-          {% render 'product-card', product: product %}
+          <div class="reveal" style="--reveal-delay: {{ forloop.index0 | times: 0.06 }}s;">
+            {% render 'product-card', product: product %}
+          </div>
         {%- endfor -%}
       {%- else -%}
-        {%- comment -%} Platzhalter, solange noch keine Produkte/Kollektion verknüpft sind {%- endcomment -%}
-        {%- for i in (1..limit) -%}
-          {% render 'product-card', placeholder: true %}
+        {%- comment -%} Kuratierte Default-Karten mit mitgelieferten Motiven {%- endcomment -%}
+        {%- assign demo_titles = 'Solitär-Ring Lumen|Ohrhänger Goutte|Armreif-Trio|Halskette Filigrane' | split: '|' -%}
+        {%- assign demo_prices = 'ab 690 €|390 €|540 €|320 €' | split: '|' -%}
+        {%- assign demo_images = 'klunker-ring.png|klunker-earring.png|klunker-bangles.png|klunker-hero.png' | split: '|' -%}
+        {%- assign demo_badges = 'Neu|||' | split: '|' -%}
+        {%- for i in (0..3) -%}
+          {%- if forloop.index > limit -%}{%- break -%}{%- endif -%}
+          <div class="reveal" style="--reveal-delay: {{ i | times: 0.06 }}s;">
+            {% render 'product-card',
+              image_asset: demo_images[i],
+              title: demo_titles[i],
+              price: demo_prices[i],
+              vendor: '18 Karat Gold',
+              badge: demo_badges[i] %}
+          </div>
         {%- endfor -%}
       {%- endif -%}
     </div>
-
-    {%- if section.settings.button_label != blank -%}
-      <div class="product-grid__foot">
-        <a
-          href="{{ section.settings.button_link | default: collection.url | default: routes.all_products_collection_url }}"
-          class="btn{% if section.settings.button_style == 'solid' %} btn--solid{% endif %}"
-        >
-          {{ section.settings.button_label }}
-        </a>
-      </div>
-    {%- endif -%}
   </div>
 </section>
 
@@ -58,6 +64,12 @@
     },
     {
       "type": "text",
+      "id": "index_number",
+      "label": "Nummer (z. B. 01)",
+      "default": "01"
+    },
+    {
+      "type": "text",
       "id": "overline",
       "label": "Eyebrow",
       "default": "Die Kollektion"
@@ -69,19 +81,14 @@
       "default": "Neuheiten"
     },
     {
-      "type": "text",
-      "id": "text",
-      "label": "Untertext",
-      "default": "Ausgewählte Stücke der aktuellen Saison."
-    },
-    {
       "type": "header",
       "content": "Produkte"
     },
     {
       "type": "collection",
       "id": "collection",
-      "label": "Kollektion"
+      "label": "Kollektion",
+      "info": "Ohne Kollektion werden kuratierte Beispielkarten angezeigt."
     },
     {
       "type": "range",
@@ -108,24 +115,14 @@
     {
       "type": "text",
       "id": "button_label",
-      "label": "Button-Text",
+      "label": "Link-Text",
       "default": "Alle ansehen"
     },
     {
       "type": "url",
       "id": "button_link",
-      "label": "Button-Link",
+      "label": "Link",
       "info": "Leer lassen, um auf die gewählte Kollektion zu verlinken."
-    },
-    {
-      "type": "select",
-      "id": "button_style",
-      "label": "Button-Stil",
-      "options": [
-        { "value": "outline", "label": "Outline" },
-        { "value": "solid", "label": "Fläche" }
-      ],
-      "default": "outline"
     },
     {
       "type": "header",

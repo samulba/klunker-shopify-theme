@@ -1,0 +1,70 @@
+<div class="marquee scheme-{{ section.settings.color_scheme }}" style="--marquee-duration: {{ section.settings.speed }}s;">
+  <div class="marquee__track" aria-hidden="false">
+    {%- comment -%} Inhalt zweimal ausgeben → nahtlose Endlosschleife (-50%) {%- endcomment -%}
+    {%- for i in (1..2) -%}
+      <div class="marquee__item">
+        {%- for block in section.blocks -%}
+          <span>{{ block.settings.text }}</span>
+          <span class="marquee__dot" {{ block.shopify_attributes }}></span>
+        {%- endfor -%}
+      </div>
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Lauftext",
+  "tag": "section",
+  "max_blocks": 8,
+  "settings": [
+    {
+      "type": "range",
+      "id": "speed",
+      "label": "Geschwindigkeit (Dauer)",
+      "min": 15,
+      "max": 60,
+      "step": 1,
+      "unit": "s",
+      "default": 34
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Farbschema",
+      "options": [
+        { "value": "white", "label": "Reinweiß" },
+        { "value": "offwhite", "label": "Off-White" },
+        { "value": "black", "label": "Tiefschwarz" }
+      ],
+      "default": "white"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Wort",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Feinschmuck"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Lauftext",
+      "blocks": [
+        { "type": "item", "settings": { "text": "Feinschmuck" } },
+        { "type": "item", "settings": { "text": "Maßanfertigung" } },
+        { "type": "item", "settings": { "text": "18 Karat Gold" } },
+        { "type": "item", "settings": { "text": "Handgefertigt" } },
+        { "type": "item", "settings": { "text": "Diamanten" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

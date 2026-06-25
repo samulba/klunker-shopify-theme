@@ -10,26 +10,6 @@
           <p>{{ section.settings.brand_text }}</p>
         {%- endif -%}
 
-        {%- if section.settings.show_newsletter -%}
-          <div style="margin-top: var(--space-lg);">
-            {%- if section.settings.newsletter_heading != blank -%}
-              <div class="footer__col-title">{{ section.settings.newsletter_heading }}</div>
-            {%- endif -%}
-            {%- form 'customer', class: 'newsletter' -%}
-              <input type="hidden" name="contact[tags]" value="newsletter">
-              <input
-                type="email"
-                name="contact[email]"
-                placeholder="{{ section.settings.newsletter_placeholder | escape }}"
-                aria-label="{{ section.settings.newsletter_placeholder | escape }}"
-                required
-              >
-              <button type="submit">{{ 'general.newsletter.subscribe' | t }}</button>
-            {%- endform -%}
-          </div>
-        {%- endif -%}
-
-        {%- comment -%} Social-Links aus den globalen Theme-Einstellungen {%- endcomment -%}
         {%- if settings.social_instagram != blank
           or settings.social_pinterest != blank
           or settings.social_tiktok != blank
@@ -65,6 +45,10 @@
       {%- endfor -%}
     </div>
 
+    {%- if section.settings.wordmark != blank -%}
+      <div class="footer__wordmark">{{ section.settings.wordmark }}</div>
+    {%- endif -%}
+
     <div class="footer__bottom">
       <span>&copy; {{ 'now' | date: '%Y' }} {{ section.settings.copyright_text | default: shop.name }}</span>
       <span class="footer__bottom-links">
@@ -98,33 +82,18 @@
       "type": "richtext",
       "id": "brand_text",
       "label": "Kurztext",
-      "default": "<p>Quiet Luxury aus Berlin. Zeitlose Mode in monochromer Klarheit.</p>"
-    },
-    {
-      "type": "header",
-      "content": "Newsletter"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_newsletter",
-      "label": "Newsletter anzeigen",
-      "default": true
-    },
-    {
-      "type": "text",
-      "id": "newsletter_heading",
-      "label": "Überschrift",
-      "default": "Letters"
-    },
-    {
-      "type": "text",
-      "id": "newsletter_placeholder",
-      "label": "Platzhalter",
-      "default": "E-Mail-Adresse"
+      "default": "<p>Handgefertigter Feinschmuck aus Berlin. Massives Gold, echte Diamanten — auf Wunsch als Maßanfertigung.</p>"
     },
     {
       "type": "header",
       "content": "Unten"
+    },
+    {
+      "type": "text",
+      "id": "wordmark",
+      "label": "Große Wortmarke",
+      "default": "KLUNKER",
+      "info": "Leer lassen, um die XXL-Wortmarke auszublenden."
     },
     {
       "type": "text",
@@ -179,7 +148,7 @@
     {
       "name": "Footer",
       "blocks": [
-        { "type": "menu", "settings": { "heading": "Shop" } },
+        { "type": "menu", "settings": { "heading": "Schmuck" } },
         { "type": "menu", "settings": { "heading": "Service" } },
         { "type": "menu", "settings": { "heading": "Haus" } }
       ]

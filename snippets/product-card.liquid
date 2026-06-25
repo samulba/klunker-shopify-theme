@@ -1,21 +1,18 @@
 {%- comment -%}
-  Produktkarte — Quiet-Luxury-Stil.
-  Akzeptiert:
-    - product:     ein Produktobjekt (optional)
-    - placeholder: true, um eine Platzhalterkarte zu zeigen (optional)
+  Produktkarte — Quiet-Luxury-Stil. Drei Modi:
+    1. product:     Produktobjekt (mit zweitem Bild beim Hover, falls vorhanden)
+    2. image_asset: kuratierte Karte aus einem Theme-Asset (+ title, price, url, badge)
+    3. ohne Angabe: Platzhalterkarte
 {%- endcomment -%}
 
-{%- if placeholder -%}
-  <div class="product-card">
-    <div class="product-card__media">
-      {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
-    </div>
-    <div class="product-card__info">
-      <span class="product-card__title">Produktname</span>
-      <span class="price">€ 0,00</span>
-    </div>
-  </div>
-{%- else -%}
+{%- if product != blank and product != empty -%}
+  {%- liquid
+    assign second = product.media[1]
+    assign has_secondary = false
+    if second != blank
+      assign has_secondary = true
+    endif
+  -%}
   <a href="{{ product.url }}" class="product-card">
     <div class="product-card__media">
       {%- if product.featured_media != blank -%}
@@ -26,10 +23,24 @@
             loading: 'lazy',
             sizes: '(max-width: 749px) 50vw, 25vw',
             widths: '300, 400, 600, 800, 1000',
-            alt: product.featured_media.alt | default: product.title
+            alt: product.featured_media.alt | default: product.title,
+            class: 'product-card__img product-card__img--primary'
         }}
       {%- else -%}
-        {{ 'product-2' | placeholder_svg_tag: 'placeholder-svg' }}
+        {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+      {%- endif -%}
+
+      {%- if has_secondary -%}
+        {{
+          second
+          | image_url: width: 800
+          | image_tag:
+            loading: 'lazy',
+            sizes: '(max-width: 749px) 50vw, 25vw',
+            widths: '300, 400, 600, 800, 1000',
+            alt: product.title,
+            class: 'product-card__img product-card__img--secondary'
+        }}
       {%- endif -%}
 
       {%- if product.compare_at_price > product.price -%}
@@ -47,4 +58,28 @@
       {% render 'price', product: product %}
     </div>
   </a>
+
+{%- elsif image_asset != blank -%}
+  <a href="{{ url | default: '#' }}" class="product-card">
+    <div class="product-card__media">
+      {{ image_asset | asset_url | image_tag: loading: 'lazy', alt: title, class: 'product-card__img product-card__img--primary' }}
+      {%- if badge != blank -%}<span class="product-card__badge">{{ badge }}</span>{%- endif -%}
+    </div>
+    <div class="product-card__info">
+      {%- if vendor != blank -%}<span class="product-card__vendor">{{ vendor }}</span>{%- endif -%}
+      <span class="product-card__title">{{ title }}</span>
+      {%- if price != blank -%}<span class="price">{{ price }}</span>{%- endif -%}
+    </div>
+  </a>
+
+{%- else -%}
+  <div class="product-card">
+    <div class="product-card__media">
+      {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+    </div>
+    <div class="product-card__info">
+      <span class="product-card__title">Produktname</span>
+      <span class="price">€ 0,00</span>
+    </div>
+  </div>
 {%- endif -%}

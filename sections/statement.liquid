@@ -1,0 +1,58 @@
+<section class="section scheme-{{ section.settings.color_scheme }}">
+  <div class="page-width">
+    <div class="statement reveal">
+      {%- if section.settings.overline != blank -%}
+        <span class="overline">{{ section.settings.overline }}</span>
+      {%- endif -%}
+      {%- if section.settings.text != blank -%}
+        <p class="statement__text">{{ section.settings.text }}</p>
+      {%- endif -%}
+      {%- if section.settings.cite != blank -%}
+        <div class="statement__cite overline">{{ section.settings.cite }}</div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Statement",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "overline",
+      "label": "Eyebrow",
+      "default": "Die Haltung"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Statement",
+      "default": "Wahre Eleganz braucht kein Aufsehen — nur Beständigkeit."
+    },
+    {
+      "type": "text",
+      "id": "cite",
+      "label": "Signatur",
+      "default": "Klunker — seit 2026"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Farbschema",
+      "options": [
+        { "value": "white", "label": "Reinweiß" },
+        { "value": "offwhite", "label": "Off-White" },
+        { "value": "black", "label": "Tiefschwarz" }
+      ],
+      "default": "white"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Statement"
+    }
+  ]
+}
+{% endschema %}

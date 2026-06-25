@@ -1,26 +1,29 @@
 # Klunker — Shopify Theme
 
-Shopify-Theme (Online Store 2.0) für die Modemarke **Klunker**.
-Designrichtung: **Quiet Luxury / High Fashion** — streng monochrom, viel
-Weißraum, elegante Serif-Headlines, schlanke Sans, dünne Hairline-Linien.
+Shopify-Theme (Online Store 2.0) für **Klunker**, eine Marke für handgefertigten
+**Feinschmuck** mit **Maßanfertigung auf Anfrage**. Designrichtung:
+**Quiet Luxury** — streng monochrom (Weiß / Off-White / Schwarz / Champagner-
+Akzent), elegante Serif-Headlines, schlanke Sans, viel Weißraum, dünne Hairlines
+und ruhige Scroll-Animationen.
 
 ## Struktur
 
-Die komplette Theme-Struktur liegt im Repo-Root:
-
 ```
-assets/      base.css, global.js
+assets/      base.css, global.js, klunker-*.png (6 Schmuck-Motive)
 config/      settings_schema.json, settings_data.json
 layout/      theme.liquid
 locales/     de.default.json, en.json
-sections/    header, hero, product-grid, footer, main-*
-snippets/    product-card, price, social-icons
-templates/   index.json, product.json, collection.json,
-             cart.json, page.json, 404.json, search.json
+sections/    announcement-bar, header, hero, marquee, collection-list,
+             product-grid, image-with-text, bespoke, statement, newsletter,
+             footer, main-*
+snippets/    responsive-image, product-card, price, social-icons
+templates/   index.json, product/collection/cart/page/404/search.json
 ```
 
-Die Startseite (`templates/index.json`) besteht aus drei Sections:
-**Hero**, **Produkt-Grid** und **Footer** — alle im Theme-Editor anpassbar.
+Die Startseite (`templates/index.json`) ist eine durchgestaltete Editorial-
+Strecke: **Hero → Lauftext → Kategorien → Neuheiten → Bild-mit-Text →
+Maßanfertigung → Statement → Newsletter → Footer**. Alle Texte, Bilder und
+Farben sind im Theme-Editor anpassbar.
 
 ## Lokale Entwicklung
 
@@ -32,4 +35,4 @@ shopify theme check    # Theme auf Fehler prüfen
 shopify theme push     # In einen Store hochladen
 ```
 
-Gestalterische Leitlinien und Konventionen: siehe [CLAUDE.md](./CLAUDE.md).
+Gestalterische Leitlinien, Bild- und Section-Übersicht: siehe [CLAUDE.md](./CLAUDE.md).

@@ -1,9 +1,13 @@
 {%- liquid
   assign menu = section.settings.menu
   assign links = linklists[menu].links
+  assign overlay = false
+  if section.settings.enable_transparent and request.page_type == 'index'
+    assign overlay = true
+  endif
 -%}
 
-<header class="header scheme-{{ section.settings.color_scheme }}">
+<header class="header{% if overlay %} header--overlay{% endif %} scheme-{{ section.settings.color_scheme }}">
   <div class="page-width">
     <div class="header__inner">
       {%- comment -%} Linke Navigation (Desktop) {%- endcomment -%}
@@ -83,6 +87,13 @@
       "id": "menu",
       "label": "Navigationsmenü",
       "default": "main-menu"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_transparent",
+      "label": "Transparenter Header über dem Hero (Startseite)",
+      "info": "Empfohlen nur mit einem dunklen Hero-Bild. Standard: aus (heller, solider Header).",
+      "default": false
     },
     {
       "type": "select",

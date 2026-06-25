@@ -1,0 +1,68 @@
+<div class="announcement scheme-black">
+  <div class="page-width">
+    <div class="announcement__inner">
+      {%- if section.settings.link_label != blank -%}
+        <a href="{{ section.settings.link_url | default: '#' }}" class="announcement__aside">
+          {{ section.settings.link_label }}
+        </a>
+      {%- else -%}
+        <span></span>
+      {%- endif -%}
+
+      <p class="announcement__msg" style="margin:0;">{{ section.settings.message }}</p>
+
+      {%- if section.settings.link_label_2 != blank -%}
+        <a href="{{ section.settings.link_url_2 | default: '#' }}" class="announcement__aside announcement__aside--right">
+          {{ section.settings.link_label_2 }}
+        </a>
+      {%- else -%}
+        <span></span>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Ankündigungsleiste",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "message",
+      "label": "Nachricht",
+      "default": "Maßanfertigung auf Anfrage — handgefertigt in Berlin"
+    },
+    {
+      "type": "header",
+      "content": "Link links"
+    },
+    {
+      "type": "text",
+      "id": "link_label",
+      "label": "Text",
+      "default": "Versandkostenfrei ab 150 €"
+    },
+    {
+      "type": "url",
+      "id": "link_url",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Link rechts"
+    },
+    {
+      "type": "text",
+      "id": "link_label_2",
+      "label": "Text",
+      "default": "Termin vereinbaren"
+    },
+    {
+      "type": "url",
+      "id": "link_url_2",
+      "label": "Link"
+    }
+  ]
+}
+{% endschema %}
