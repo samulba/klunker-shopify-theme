@@ -11,6 +11,9 @@
     "section_spacing": 96,
     "show_section_dividers": true,
     "button_style": "outline",
+    "floating_cta_enabled": true,
+    "floating_cta_label": "Custom anfragen",
+    "floating_cta_link": "",
     "social_instagram": "",
     "social_pinterest": "",
     "social_tiktok": ""

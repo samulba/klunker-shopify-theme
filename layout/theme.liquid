@@ -85,6 +85,12 @@
       {{ content_for_layout }}
     </main>
 
+    {%- if settings.floating_cta_enabled and settings.floating_cta_label != blank -%}
+      <a class="floating-cta" href="{{ settings.floating_cta_link | default: '#' }}" data-floating-cta>
+        <span class="floating-cta__dot"></span>{{ settings.floating_cta_label }}
+      </a>
+    {%- endif -%}
+
     {%- comment -%}
       Der Footer wird laut Projektvorgabe als Section in templates/index.json
       gepflegt. So lässt er sich auf der Startseite direkt im Theme-Editor

@@ -5,10 +5,14 @@ damit Stil und Struktur konsistent bleiben.
 
 ## Projekt
 
-Shopify-Theme (Online Store 2.0) für **Klunker** — eine **Schmuckmarke**
-(Feinschmuck aus Gold & Diamanten) mit **Maßanfertigung auf Anfrage**
-(Bespoke / made-to-order). Die Maßanfertigung ist ein zentrales Verkaufs-
-argument und bekommt auf der Startseite eine eigene Sektion (`bespoke`).
+Shopify-Theme (Online Store 2.0) für **Klunker** — eine **Schmuckmarke** mit
+dem Kern-USP **Custom-Schmuck auf Anfrage**: jedes Stück wird nach Kundenentwurf
+gefertigt. **Für alle und alles** — nicht nur Frauenschmuck, sondern Ringe,
+Siegelringe, Ketten, Ohrschmuck, Eheringe, Unikate … Diese Botschaft trägt die
+Startseite: ein großes Custom-Statement (`custom-list`), die Prozess-Sektion
+(`bespoke`), die Ansprache in „du"-Form und ein dauerhaft sichtbarer
+„Custom anfragen"-Button (schwebend, global in `theme.liquid`).
+Tonalität: modern, inklusiv, ohne Schubladen.
 
 Die gesamte Theme-Struktur liegt im **Repo-Root**: `assets/`, `config/`,
 `layout/`, `locales/`, `sections/`, `snippets/`, `templates/`.
@@ -95,18 +99,24 @@ Die PNGs sind groß (~1–2 MB) — bei echten Produkten ggf. optimieren/als Web
 ### Dateiübersicht (Sections)
 
 ```
-Global (in theme.liquid):  announcement-bar, header
-Startseite (index.json):   hero · marquee · collection-list · product-grid ·
-                           image-with-text · bespoke · statement · newsletter · footer
+Global (in theme.liquid):  announcement-bar, header, schwebender Custom-CTA
+Startseite (index.json):   hero · marquee · custom-list · collection-list ·
+                           product-grid · image-with-text · bespoke ·
+                           statement · newsletter · footer
 Standard-Templates:        main-product · main-collection · main-cart ·
                            main-page · main-404 · main-search
 ```
 
 ### Startseite (`templates/index.json`)
-Reihenfolge: Hero → Lauftext → Kategorien → Produkt-Grid → Bild-mit-Text →
-**Maßanfertigung** → Statement → Newsletter → Footer. Header & Ankündigungs-
-leiste sind global in `theme.liquid`. Der Footer wird (wie ursprünglich
-vorgegeben) als Section in `index.json` gepflegt.
+Reihenfolge: Hero → Lauftext → **Custom-Statement** → Kategorien → Produkt-Grid →
+Bild-mit-Text → **Maßanfertigung** → Statement → Newsletter → Footer. Header &
+Ankündigungsleiste sind global in `theme.liquid`, ebenso der schwebende
+„Custom anfragen"-Button (steuerbar unter Theme-Einstellungen → „Custom-Anfrage").
+Der Footer wird (wie ursprünglich vorgegeben) als Section in `index.json` gepflegt.
+
+Das **Custom-Statement** (`custom-list`, schwarz) ist der WOW-/Botschafts-Moment:
+große Cormorant-Typo mit kursivem Akzentwort und einer Hover-Liste der
+fertigbaren Stücke — bewusst breit (Siegelringe, Eheringe, Unisex, Unikate).
 
 ---
 

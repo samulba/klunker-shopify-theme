@@ -1,0 +1,144 @@
+<section class="section custom scheme-{{ section.settings.color_scheme }}">
+  <div class="page-width">
+    <div class="custom__head reveal">
+      {%- if section.settings.overline != blank -%}
+        <span class="overline">{{ section.settings.overline }}</span>
+      {%- endif -%}
+      {%- if section.settings.lead != blank -%}
+        <h2 class="custom__lead">
+          {{ section.settings.lead }}
+          {%- if section.settings.lead_accent != blank %} <em>{{ section.settings.lead_accent }}</em>{% endif -%}
+        </h2>
+      {%- endif -%}
+      {%- if section.settings.intro != blank -%}
+        <p class="custom__intro">{{ section.settings.intro }}</p>
+      {%- endif -%}
+    </div>
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="custom__list">
+        {%- for block in section.blocks -%}
+          <a
+            href="{{ block.settings.link | default: '#' }}"
+            class="custom__item reveal"
+            style="--reveal-delay: {{ forloop.index0 | times: 0.05 }}s;"
+            {{ block.shopify_attributes }}
+          >
+            <span class="custom__item-label">
+              <span class="custom__index">{{ forloop.index | prepend: '0' }}</span>
+              <span>{{ block.settings.label }}</span>
+            </span>
+            <span class="custom__item-arrow" aria-hidden="true">&rarr;</span>
+          </a>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.button_label != blank or section.settings.note != blank -%}
+      <div class="custom__foot reveal">
+        {%- if section.settings.button_label != blank -%}
+          <a href="{{ section.settings.button_link | default: '#' }}" class="btn btn--solid">
+            {{ section.settings.button_label }}
+          </a>
+        {%- endif -%}
+        {%- if section.settings.note != blank -%}
+          <p class="custom__note">{{ section.settings.note }}</p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Custom-Statement",
+  "tag": "section",
+  "max_blocks": 10,
+  "settings": [
+    {
+      "type": "text",
+      "id": "overline",
+      "label": "Eyebrow",
+      "default": "Auf Anfrage gefertigt"
+    },
+    {
+      "type": "text",
+      "id": "lead",
+      "label": "Überschrift",
+      "default": "Wir fertigen"
+    },
+    {
+      "type": "text",
+      "id": "lead_accent",
+      "label": "Hervorgehobenes Wort (kursiv)",
+      "default": "alles."
+    },
+    {
+      "type": "textarea",
+      "id": "intro",
+      "label": "Einleitung",
+      "default": "Von Siegelring bis Solitär, von Kette bis Unikat. Custom-Schmuck nach deinem Entwurf — für alle, ganz ohne Schubladen."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button-Text",
+      "default": "Custom anfragen"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button-Link"
+    },
+    {
+      "type": "text",
+      "id": "note",
+      "label": "Notiz neben Button",
+      "default": "Für alle. Egal was. Egal für wen."
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Farbschema",
+      "options": [
+        { "value": "white", "label": "Reinweiß" },
+        { "value": "offwhite", "label": "Off-White" },
+        { "value": "black", "label": "Tiefschwarz" }
+      ],
+      "default": "black"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Eintrag",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Bezeichnung",
+          "default": "Ringe"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom-Statement",
+      "blocks": [
+        { "type": "item", "settings": { "label": "Ringe & Siegelringe" } },
+        { "type": "item", "settings": { "label": "Ketten & Anhänger" } },
+        { "type": "item", "settings": { "label": "Ohrschmuck" } },
+        { "type": "item", "settings": { "label": "Armbänder" } },
+        { "type": "item", "settings": { "label": "Eheringe & Verlobung" } },
+        { "type": "item", "settings": { "label": "Dein Unikat" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -123,6 +123,33 @@
     ]
   },
   {
+    "name": "Custom-Anfrage (CTA)",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Schwebender Button unten rechts, der nach dem Scrollen erscheint und auf die Maßanfertigung führt."
+      },
+      {
+        "type": "checkbox",
+        "id": "floating_cta_enabled",
+        "label": "Schwebenden Button anzeigen",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "floating_cta_label",
+        "label": "Button-Text",
+        "default": "Custom anfragen"
+      },
+      {
+        "type": "url",
+        "id": "floating_cta_link",
+        "label": "Button-Link",
+        "info": "z. B. Maßanfertigungs- oder Kontaktseite."
+      }
+    ]
+  },
+  {
     "name": "Social Media",
     "settings": [
       {

@@ -3,13 +3,13 @@
     "hero": {
       "type": "hero",
       "settings": {
-        "overline": "Feinschmuck · Berlin",
-        "heading": "Für die Ewigkeit gemacht",
-        "text": "<p>Zeitloser Goldschmuck, von Hand gefertigt. Fein, echt und auf Wunsch ganz nach Ihrem Entwurf.</p>",
-        "button_label": "Kollektion entdecken",
-        "button_label_2": "Maßanfertigung anfragen",
-        "overlay_opacity": 30,
-        "height": 90,
+        "overline": "Custom Feinschmuck · Berlin",
+        "heading": "Alles, was du willst — in Gold.",
+        "text": "<p>Custom-Schmuck auf Anfrage. Für alle, vom Siegelring bis zum Solitär — nach deinem Entwurf von Hand gefertigt.</p>",
+        "button_label": "Custom anfragen",
+        "button_label_2": "Kollektion ansehen",
+        "overlay_opacity": 34,
+        "height": 92,
         "text_alignment": "center",
         "show_scroll_cue": true,
         "scroll_label": "Scrollen",
@@ -19,24 +19,42 @@
     "marquee": {
       "type": "marquee",
       "blocks": {
-        "m1": { "type": "item", "settings": { "text": "Feinschmuck" } },
-        "m2": { "type": "item", "settings": { "text": "Maßanfertigung" } },
+        "m1": { "type": "item", "settings": { "text": "Custom auf Anfrage" } },
+        "m2": { "type": "item", "settings": { "text": "Für alle" } },
         "m3": { "type": "item", "settings": { "text": "18 Karat Gold" } },
         "m4": { "type": "item", "settings": { "text": "Handgefertigt" } },
         "m5": { "type": "item", "settings": { "text": "Diamanten" } }
       },
       "block_order": ["m1", "m2", "m3", "m4", "m5"],
+      "settings": { "speed": 32, "color_scheme": "white" }
+    },
+    "custom": {
+      "type": "custom-list",
+      "blocks": {
+        "c1": { "type": "item", "settings": { "label": "Ringe & Siegelringe" } },
+        "c2": { "type": "item", "settings": { "label": "Ketten & Anhänger" } },
+        "c3": { "type": "item", "settings": { "label": "Ohrschmuck" } },
+        "c4": { "type": "item", "settings": { "label": "Armbänder" } },
+        "c5": { "type": "item", "settings": { "label": "Eheringe & Verlobung" } },
+        "c6": { "type": "item", "settings": { "label": "Dein Unikat" } }
+      },
+      "block_order": ["c1", "c2", "c3", "c4", "c5", "c6"],
       "settings": {
-        "speed": 34,
-        "color_scheme": "white"
+        "overline": "Auf Anfrage gefertigt",
+        "lead": "Wir fertigen",
+        "lead_accent": "alles.",
+        "intro": "Von Siegelring bis Solitär, von Kette bis Unikat. Custom-Schmuck nach deinem Entwurf — für alle, ganz ohne Schubladen.",
+        "button_label": "Custom anfragen",
+        "note": "Für alle. Egal was. Egal für wen.",
+        "color_scheme": "black"
       }
     },
     "categories": {
       "type": "collection-list",
       "blocks": {
         "t1": { "type": "tile", "settings": { "title": "Ringe", "cta": "Ansehen" } },
-        "t2": { "type": "tile", "settings": { "title": "Halsketten", "cta": "Ansehen" } },
-        "t3": { "type": "tile", "settings": { "title": "Ohrringe", "cta": "Ansehen" } }
+        "t2": { "type": "tile", "settings": { "title": "Ketten", "cta": "Ansehen" } },
+        "t3": { "type": "tile", "settings": { "title": "Ohrschmuck", "cta": "Ansehen" } }
       },
       "block_order": ["t1", "t2", "t3"],
       "settings": {
@@ -73,16 +91,16 @@
     "bespoke": {
       "type": "bespoke",
       "blocks": {
-        "s1": { "type": "step", "settings": { "title": "Anfrage", "text": "Schildern Sie uns Ihre Vorstellung — unverbindlich." } },
-        "s2": { "type": "step", "settings": { "title": "Entwurf", "text": "Wir gestalten Skizze und Angebot für Ihr Unikat." } },
-        "s3": { "type": "step", "settings": { "title": "Anfertigung", "text": "Handgefertigt in 18 Karat Gold, nur für Sie." } }
+        "s1": { "type": "step", "settings": { "title": "Anfrage", "text": "Erzähl uns deine Idee — unverbindlich." } },
+        "s2": { "type": "step", "settings": { "title": "Entwurf", "text": "Wir gestalten Skizze und Angebot für dein Unikat." } },
+        "s3": { "type": "step", "settings": { "title": "Anfertigung", "text": "Handgefertigt in 18 Karat Gold, nur für dich." } }
       },
       "block_order": ["s1", "s2", "s3"],
       "settings": {
         "layout": "reverse",
         "overline": "Maßanfertigung auf Anfrage",
-        "heading": "Ihr Entwurf, in Gold gegossen.",
-        "text": "<p>Ob Verlobungsring oder Erbstück mit neuer Bedeutung — wir fertigen Ihr Wunschstück individuell an. Erzählen Sie uns Ihre Idee, und wir begleiten Sie vom ersten Entwurf bis zum fertigen Schmuck.</p>",
+        "heading": "Dein Entwurf, in Gold gegossen.",
+        "text": "<p>Ob Siegelring, Kette oder Ehering — wir fertigen jedes Stück nach deinem Entwurf. Für jede:n, ohne Kompromisse. Erzähl uns deine Idee, und wir begleiten dich vom ersten Entwurf bis zum fertigen Schmuck.</p>",
         "button_label": "Anfrage stellen",
         "color_scheme": "white"
       }
@@ -101,7 +119,7 @@
       "settings": {
         "overline": "Letters von Klunker",
         "heading": "Als Erste:r erfahren.",
-        "text": "Neue Stücke, limitierte Editionen und Einblicke ins Atelier — direkt in Ihr Postfach.",
+        "text": "Neue Stücke, limitierte Editionen und Einblicke ins Atelier — direkt in dein Postfach.",
         "placeholder": "E-Mail-Adresse",
         "color_scheme": "black"
       }
@@ -116,7 +134,7 @@
       "block_order": ["schmuck", "service", "haus"],
       "settings": {
         "brand_heading": "KLUNKER",
-        "brand_text": "<p>Handgefertigter Feinschmuck aus Berlin. Massives Gold, echte Diamanten — auf Wunsch als Maßanfertigung.</p>",
+        "brand_text": "<p>Handgefertigter Feinschmuck aus Berlin. Custom auf Anfrage — für alle, vom Siegelring bis zum Solitär.</p>",
         "wordmark": "KLUNKER",
         "copyright_text": "Klunker",
         "color_scheme": "offwhite"
@@ -126,6 +144,7 @@
   "order": [
     "hero",
     "marquee",
+    "custom",
     "categories",
     "products",
     "editorial",
