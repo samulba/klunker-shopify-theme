@@ -32,10 +32,10 @@
         {%- endfor -%}
       {%- else -%}
         {%- comment -%} Kuratierte Default-Karten mit mitgelieferten Motiven {%- endcomment -%}
-        {%- assign demo_titles = 'Solitär-Ring Lumen|Ohrhänger Goutte|Armreif-Trio|Halskette Filigrane' | split: '|' -%}
-        {%- assign demo_prices = 'ab 690 €|390 €|540 €|320 €' | split: '|' -%}
-        {%- assign demo_images = 'klunker-ring.png|klunker-earring.png|klunker-bangles.png|klunker-hero.png' | split: '|' -%}
-        {%- assign demo_badges = 'Neu|||' | split: '|' -%}
+        {%- assign demo_titles = 'Solitär-Ring Lumen|Siegelring Atlas|Ohrhänger Goutte|Verlobungsring Aurum' | split: '|' -%}
+        {%- assign demo_prices = 'ab 690 €|540 €|390 €|ab 1.290 €' | split: '|' -%}
+        {%- assign demo_images = 'klunker-solitaire.png|klunker-signet.png|klunker-earring.png|klunker-ring.png' | split: '|' -%}
+        {%- assign demo_badges = 'Neu||Neu|' | split: '|' -%}
         {%- for i in (0..3) -%}
           {%- if forloop.index > limit -%}{%- break -%}{%- endif -%}
           <div class="reveal" style="--reveal-delay: {{ i | times: 0.06 }}s;">

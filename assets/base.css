@@ -1715,4 +1715,179 @@ a.custom__item:hover .custom__item-arrow {
   }
 }
 
+/* ==========================================================================
+   Scrollytelling — gepinnte Bildstrecke „Vom Entwurf zum Unikat"
+   ========================================================================== */
+
+.scrolly {
+  position: relative;
+  background: var(--color-black);
+  color: var(--color-white);
+}
+
+.js .scrolly {
+  height: calc(var(--chapters, 4) * 88vh);
+}
+
+.scrolly__sticky {
+  position: relative;
+  height: 100vh;
+  min-height: 600px;
+  overflow: hidden;
+}
+
+.js .scrolly__sticky {
+  position: sticky;
+  top: 0;
+}
+
+.scrolly__media {
+  position: absolute;
+  inset: 0;
+}
+
+.scrolly__layer {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.9s var(--ease);
+}
+
+.scrolly__layer.is-active {
+  opacity: 1;
+}
+
+.scrolly__layer img,
+.scrolly__layer svg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.08);
+  transition: transform 7s linear;
+}
+
+.scrolly__layer.is-active img {
+  transform: scale(1);
+}
+
+.scrolly__scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(10, 10, 10, 0.82),
+    rgba(10, 10, 10, 0.25) 55%,
+    rgba(10, 10, 10, 0.55)
+  );
+}
+
+.scrolly__ui {
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-block: calc(var(--header-h) + var(--space-lg)) var(--space-2xl);
+}
+
+.scrolly__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+}
+
+.scrolly__top .overline {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.scrolly__counter {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.4em;
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  letter-spacing: 0.08em;
+}
+
+.scrolly__counter b {
+  font-weight: 500;
+}
+
+.scrolly__counter span {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.scrolly__captions {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+}
+
+.scrolly__caption {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  max-width: 46rem;
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+  pointer-events: none;
+}
+
+.scrolly__caption.is-active {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+
+.scrolly__num {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: clamp(2.5rem, 7vw, 5.5rem);
+  line-height: 1;
+  color: var(--color-accent);
+}
+
+.scrolly__title {
+  margin-top: var(--space-xs);
+  font-size: clamp(1.9rem, 4.5vw, 3.4rem);
+  font-weight: 400;
+}
+
+.scrolly__text {
+  margin-top: var(--space-sm);
+  max-width: 42ch;
+  font-size: clamp(1rem, 1.4vw, 1.2rem);
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.scrolly__progress {
+  position: relative;
+  height: 1px;
+  margin-top: var(--space-lg);
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.scrolly__progress span {
+  position: absolute;
+  inset: 0;
+  background: var(--color-accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.1s linear;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scrolly__layer,
+  .scrolly__layer img,
+  .scrolly__caption {
+    transition: none;
+  }
+  .scrolly__layer img {
+    transform: none;
+  }
+}
+
 

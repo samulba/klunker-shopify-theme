@@ -44,6 +44,7 @@
 
   var progressEl = document.querySelector("[data-progress]");
   var parallaxEls = [];
+  var scrollyItems = [];
   var ticking = false;
 
   function onScroll() {
@@ -73,6 +74,8 @@
           el.style.transform = "translate3d(0," + ty.toFixed(1) + "px,0) scale(1.12)";
         }
       }
+
+      updateScrolly();
 
       ticking = false;
     });
@@ -184,10 +187,49 @@
     });
   }
 
+  /* ---- Scrollytelling (gepinnte Bildstrecke) ------------------------- */
+
+  function initScrolly() {
+    var sections = document.querySelectorAll("[data-scrolly]");
+    scrollyItems = [];
+    Array.prototype.forEach.call(sections, function (sec) {
+      var layers = sec.querySelectorAll(".scrolly__layer");
+      scrollyItems.push({
+        sec: sec,
+        layers: layers,
+        caps: sec.querySelectorAll(".scrolly__caption"),
+        idx: sec.querySelector("[data-scrolly-index]"),
+        bar: sec.querySelector("[data-scrolly-bar]"),
+        n: layers.length,
+        cur: -1
+      });
+    });
+  }
+
+  function updateScrolly() {
+    if (!scrollyItems.length) return;
+    var vh = window.innerHeight;
+    for (var s = 0; s < scrollyItems.length; s++) {
+      var d = scrollyItems[s];
+      if (!d.n) continue;
+      var rect = d.sec.getBoundingClientRect();
+      var total = d.sec.offsetHeight - vh;
+      var prog = total > 0 ? Math.min(Math.max(-rect.top / total, 0), 1) : 0;
+      if (d.bar) d.bar.style.transform = "scaleX(" + prog.toFixed(4) + ")";
+      var active = Math.min(d.n - 1, Math.floor(prog * d.n));
+      if (active === d.cur) continue;
+      d.cur = active;
+      for (var i = 0; i < d.layers.length; i++) d.layers[i].classList.toggle("is-active", i === active);
+      for (var j = 0; j < d.caps.length; j++) d.caps[j].classList.toggle("is-active", j === active);
+      if (d.idx) d.idx.textContent = "0" + (active + 1);
+    }
+  }
+
   /* ---- Init ----------------------------------------------------------- */
 
   function init() {
     collectParallax();
+    initScrolly();
     onScroll();
     initReveal();
     initCounters();

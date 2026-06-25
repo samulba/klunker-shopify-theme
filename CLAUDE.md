@@ -75,20 +75,25 @@ Effekte greifen nur bei vorhandenem JS (`html.js`):
 
 ## Bilder
 
-Sechs mitgelieferte Schmuck-Motive in `assets/` (vom Kunden bereitgestellt):
+Mitgelieferte Schmuck-Motive in `assets/` (vom Kunden bereitgestellt). Aktuelle
+Primär-Platzierungen:
 
-| Datei                    | Motiv                         | Einsatz                          |
-| ------------------------ | ----------------------------- | -------------------------------- |
-| `klunker-hero.png`       | Halskette auf Stein (quer)    | Hero, 4. Produktkarte            |
-| `klunker-portrait.png`   | Model mit Halskette           | Kategorie „Halsketten"           |
-| `klunker-ring.png`       | Solitär-Ring                  | Kategorie „Ringe", Produktkarte  |
-| `klunker-earring.png`    | Diamant-Ohrhänger (weiß)      | Kategorie „Ohrringe", Produktk.  |
-| `klunker-bangles.png`    | Armreife auf Stein            | „Bild mit Text" (Material)       |
-| `klunker-atelier.png`    | Schmucketui am Fenster        | „Maßanfertigung" (bespoke)       |
+| Datei                   | Motiv                              | Einsatz                         |
+| ----------------------- | ---------------------------------- | ------------------------------- |
+| `klunker-ring-dark.png` | Diamantring auf Schiefer (dunkel)  | **Hero**                        |
+| `klunker-sk1…sk4.png`   | Skizze · Stein · Werkbank · Unikat | **Scrollytelling** (Kapitel)    |
+| `klunker-bespoke.png`   | Ring im Etui + Skizze (Marmor)     | **Maßanfertigung** (bespoke)    |
+| `klunker-solitaire.png` | Solitär-Verlobungsring (weiß)      | Kategorie „Ringe", Produktkarte |
+| `klunker-signet.png`    | Siegelring + Gliederarmband        | Kategorie „Siegelringe", Produkt (Unisex!) |
+| `klunker-portrait.png`  | Model mit Halskette                | Kategorie „Ketten"              |
+| `klunker-earring.png`   | Diamant-Ohrhänger                  | Produktkarte                    |
+| `klunker-ring.png`      | Solitär auf Seide                  | Produktkarte                    |
+| `klunker-bangles.png`   | Armreife auf Stein                 | „Bild mit Text" (Material)      |
+| `klunker-craft / -diamonds / -atelier / -hero` | weitere Motive  | Reserve / Editor-Auswahl        |
 
 **Wichtig:** Shopify liefert nur Dateien aus `assets/` aus. Bildsektionen nutzen
 ein `image_picker`-Feld (Merchant-Upload) **mit Asset-Fallback** über das Snippet
-`responsive-image`. Ohne eigenes Bild erscheint das passende mitgelieferte Motiv.
+`responsive-image` (Scrollytelling-Kapitel fallen auf `klunker-sk{n}.png` zurück).
 Die PNGs sind groß (~1–2 MB) — bei echten Produkten ggf. optimieren/als WebP.
 
 ---
@@ -108,15 +113,22 @@ Die PNGs sind groß (~1–2 MB) — bei echten Produkten ggf. optimieren/als Web
 ```
 Global (in theme.liquid):  announcement-bar, header, schwebender Custom-CTA
 Startseite (index.json):   hero · marquee · custom-list · collection-list ·
-                           product-grid · image-with-text · bespoke · stats ·
-                           statement · newsletter · footer
+                           product-grid · image-with-text · scrollytelling ·
+                           bespoke · stats · statement · newsletter · footer
 Standard-Templates:        main-product · main-collection · main-cart ·
                            main-page · main-404 · main-search
 ```
 
 ### Startseite (`templates/index.json`)
 Reihenfolge: Hero → Lauftext → **Custom-Statement** → Kategorien → Produkt-Grid →
-Bild-mit-Text → **Maßanfertigung** → **Zahlen/Stats** → Statement → Newsletter → Footer. Header &
+Bild-mit-Text → **Scrollytelling** → **Maßanfertigung** → **Zahlen/Stats** →
+Statement → Newsletter → Footer.
+
+Die **Scrollytelling-Sektion** (`scrollytelling`, schwarz, gepinnt) erzählt
+„Vom Entwurf zum Unikat" in Kapiteln (sk1–sk4: Skizze → Stein → Werkbank →
+fertiges Stück). Beim Scrollen blenden Bild und Text kapitelweise um; `global.js`
+berechnet den Fortschritt aus der Live-Position der Section (`updateScrolly`).
+Ohne JS/`prefers-reduced-motion`: erstes Kapitel statisch, keine Pinnung. Header &
 Ankündigungsleiste sind global in `theme.liquid`, ebenso der schwebende
 „Custom anfragen"-Button (steuerbar unter Theme-Einstellungen → „Custom-Anfrage").
 Der Footer wird (wie ursprünglich vorgegeben) als Section in `index.json` gepflegt.

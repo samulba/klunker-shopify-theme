@@ -15,17 +15,18 @@ config/      settings_schema.json, settings_data.json
 layout/      theme.liquid
 locales/     de.default.json, en.json
 sections/    announcement-bar, header, hero, marquee, custom-list,
-             collection-list, product-grid, image-with-text, bespoke,
-             statement, newsletter, footer, main-*
+             collection-list, product-grid, image-with-text, scrollytelling,
+             bespoke, stats, statement, newsletter, footer, main-*
 snippets/    responsive-image, product-card, price, social-icons
 templates/   index.json, product/collection/cart/page/404/search.json
 ```
 
 Die Startseite (`templates/index.json`) ist eine durchgestaltete Editorial-
 Strecke: **Hero → Lauftext → Custom-Statement → Kategorien → Neuheiten →
-Bild-mit-Text → Maßanfertigung → Statement → Newsletter → Footer** — plus ein
-schwebender „Custom anfragen"-Button. Alle Texte, Bilder und Farben sind im
-Theme-Editor anpassbar.
+Bild-mit-Text → Scrollytelling → Maßanfertigung → Zahlen → Statement →
+Newsletter → Footer** — plus ein schwebender „Custom anfragen"-Button. Die
+gepinnte **Scrollytelling**-Sektion erzählt beim Scrollen „Vom Entwurf zum
+Unikat". Alle Texte, Bilder und Farben sind im Theme-Editor anpassbar.
 
 ## Lokale Entwicklung
 
